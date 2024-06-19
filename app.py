@@ -33,6 +33,13 @@ def signup():
 
     return jsonify({'message': 'User created successfully'}), 201
 
+@app.route('/users', methods=['GET'])
+def get_users():
+    users = User.query.all()
+    user_list = [user.to_dict() for user in users]
+    return jsonify({'users': user_list}), 200
+
+
 @app.route('/login', methods=['POST'])
 def login():
     data = request.get_json()
